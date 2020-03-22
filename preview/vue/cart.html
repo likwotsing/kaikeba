@@ -22,6 +22,10 @@
   <div id="app">
     <!-- 弹窗组件 -->
     <message :show.sync="show">
+      <!-- 命名为title的插槽内容 -->
+      <template v-slot:title>
+        <strong>{{title}}</strong>
+      </template>
       新增组件成功！
     </message>
 
@@ -53,6 +57,7 @@
       template: `
         <div class="message-box" v-if="show">
           <!--通过slot获取传入内容-->
+          <slot name="title"></slot>
           <slot></slot>
           <span class="message-box-close" @click="$emit('update:show', false)">X</span>
         </div>
