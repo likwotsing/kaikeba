@@ -67,24 +67,24 @@
     
     // 新增组件
     Vue.component('course-add', {
-      // model: {
-      //   value: 'course',
-      //   event: 'input'
-      // },
-      props: ['value'], // 让组件无状态化
+      model: {
+        value: 'course',
+        event: 'change'
+      },
+      props: ['course'], // 让组件无状态化
       methods: {
         addCourse() {
           // 派发事件通知父组件新增课程
           this.$emit('add-course')
         },
         onInput(e) {
-          this.$emit('input', e.target.value)
+          this.$emit('change', e.target.value)
         }
       },
       template: `
         <!-- 用户输入 -->
         <p>
-          <input type="text" :value="value" @keydown.enter="addCourse" @input="onInput">
+          <input type="text" :value="course" @keydown.enter="addCourse" @change="onInput">
           <button @click="addCourse">新增</button>
         </p>
       `
