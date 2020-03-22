@@ -23,10 +23,14 @@
     <!-- 弹窗组件 -->
     <message :show.sync="show">
       <!-- 命名为title的插槽内容 -->
-      <template v-slot:title>
-        <strong>{{title}}</strong>
+      <template v-slot:title="slotProps">
+        <!-- slotProps可以使用任意合法的名字 -->
+        <strong>{{slotProps.title}}</strong>
       </template>
-      新增组件成功！
+      <!-- 默认插槽 -->
+      <template v-slot:default>
+        新增组件成功！
+      </template>
     </message>
 
     <h2 :title="title">
@@ -57,7 +61,7 @@
       template: `
         <div class="message-box" v-if="show">
           <!--通过slot获取传入内容-->
-          <slot name="title"></slot>
+          <slot name="title" title="来自message的title"></slot>
           <slot></slot>
           <span class="message-box-close" @click="$emit('update:show', false)">X</span>
         </div>
