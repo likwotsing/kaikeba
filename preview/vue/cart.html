@@ -8,10 +8,23 @@
     .active {
       background-color: #497EFF;
     }
+    .message-box {
+      padding: 10px 20px;
+      background: #497EFF;
+      border: 1px solid #42b983
+    }
+    .message-box-close {
+      float: right;
+    }
   </style>
 </head>
 <body>
   <div id="app">
+    <!-- 弹窗组件 -->
+    <message :show.sync="show">
+      新增组件成功！
+    </message>
+
     <h2 :title="title">
       {{title}}
     </h2>
@@ -33,6 +46,18 @@
   <script>
 
     // 组件：高内聚，低耦合
+
+    // 弹窗组件
+    Vue.component('message', {
+      props: ['show'],
+      template: `
+        <div class="message-box" v-if="show">
+          <!--通过slot获取传入内容-->
+          <slot></slot>
+          <span class="message-box-close" @click="$emit('update:show', false)">X</span>
+        </div>
+      `
+    })
 
     // 列表组件
     Vue.component('course-list', {
@@ -67,24 +92,21 @@
     
     // 新增组件
     Vue.component('course-add', {
-      model: {
-        value: 'course',
-        event: 'change'
-      },
-      props: ['course'], // 让组件无状态化
+      props: ['value'], // 让组件无状态化
       methods: {
         addCourse() {
           // 派发事件通知父组件新增课程
           this.$emit('add-course')
         },
         onInput(e) {
-          this.$emit('change', e.target.value)
+          // this.$emit('change', e.target.value)
+          this.$emit('input', e.target.value)
         }
       },
       template: `
         <!-- 用户输入 -->
         <p>
-          <input type="text" :value="course" @keydown.enter="addCourse" @change="onInput">
+          <input type="text" :value="value" @input="onInput" @keydown.enter="addCourse">
           <button @click="addCourse">新增</button>
         </p>
       `
@@ -96,7 +118,8 @@
       data: {
         title: '购物车',
         courses: ['课程1', '课程2'],
-        course: ''
+        course: '',
+        show: false
       },
       computed: {
         totalCount() {
@@ -105,6 +128,7 @@
       },
       methods: {
         addCourse() {
+          this.show = true
           this.courses.push(this.course)
           this.course = ''
         }
