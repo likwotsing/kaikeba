@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>cart</title>
+  <style>
+    .active {
+      background-color: #497EFF;
+    }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <h2 :title="title">
+      {{title}}
+    </h2>
+
+    <!-- 用户输入 -->
+    <p>
+      <input type="text" v-model="course" @keydown.enter="addCourse">
+      <button @click="addCourse">新增</button>
+    </p>
+
+    <!-- 列表组件 -->
+    <course-list :courses="courses"></course-list>
+
+
+
+    <!-- 课程总数 -->
+    <p>
+      课程总数：{{totalCount}}
+    </p>
+  </div>
+
+  <script src="./vue.js"></script>
+  <script>
+
+    // 组件：高内聚，低耦合
+
+    // 列表组件
+    Vue.component('course-list', {
+      props: {
+        courses: {
+          type: Array,
+          default: []
+        }
+      },
+      data() {
+        return {
+          selectCourse: ''
+        }
+      },
+      template: `
+        <div>
+          <!-- 条件渲染 -->
+          <p v-if="courses.length === 0">没有任何课程信息</p>
+          <!-- 列表渲染 -->
+          <div v-else
+            class="course-list"
+            :class="{active: selectCourse === c}"
+            v-for="c in courses"
+            :key="c"
+            @click="selectCourse = c"
+          >
+            {{c}}
+          </div>
+        </div>
+      `
+    })
+    
+    // 实例
+    new Vue({
+      el: '#app',
+      data: {
+        title: '购物车',
+        courses: ['课程1', '课程2'],
+        course: ''
+      },
+      computed: {
+        totalCount() {
+          return this.courses.length 
+        }
+      },
+      methods: {
+        addCourse() {
+          this.courses.push(this.course)
+          this.course = ''
+        }
+      },
+    })
+  </script>
+</body>
+</html>
