@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
+    <!-- <img src="./assets/logo.png">
     <div>
       <p>
         If Element is successfully added to this project, you'll see an
@@ -8,18 +8,22 @@
         below
       </p>
       <el-button>el-button</el-button>
-    </div>
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    </div> -->
+    <!-- <HelloWorld msg="Welcome to Your Vue.js App"/> -->
+
+    <form-example></form-example>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+// import HelloWorld from './components/HelloWorld.vue'
+import FormExample from '@/components/form/index.vue';
 
 export default {
   name: 'app',
   components: {
-    HelloWorld
+    // HelloWorld,
+    FormExample
   }
 }
 </script>
