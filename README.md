@@ -1,4 +1,4 @@
-# study-vue
+# kaikeba
 
 ## Project setup
 ```
