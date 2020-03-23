@@ -1,7 +1,24 @@
-# kaikeba
-开课吧
+# study-vue
 
-## preview
+## Project setup
+```
+npm install
+```
 
-粗放预习部分的代码
+### Compiles and hot-reloads for development
+```
+npm run serve
+```
 
+### Compiles and minifies for production
+```
+npm run build
+```
+
+### Lints and fixes files
+```
+npm run lint
+```
+
+### Customize configuration
+See [Configuration Reference](https://cli.vuejs.org/config/).
