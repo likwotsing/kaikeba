@@ -18,6 +18,8 @@
 import KInput from '@/components/form/KInput.vue';
 import KFormItem from '@/components/form/KFormItem.vue';
 import KForm from '@/components/form/KForm.vue';
+import Notice from '@/components/Notice.vue';
+
 export default {
   components: {
     KInput,
@@ -43,7 +45,12 @@ export default {
         if (isValid) {
           console.log('校验通过')
         } else {
-          console.log('校验失败')
+          // console.log('校验失败')
+          this.$create(Notice, {
+            title: '信息',
+            message: '校验失败',
+            duration: 3000
+          }).show()
         }
       })
     }
