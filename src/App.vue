@@ -12,7 +12,8 @@
     <!-- <HelloWorld msg="Welcome to Your Vue.js App"/> -->
 
     <!-- <form-example></form-example> -->
-    <NodeTest />
+    <!-- <NodeTest /> -->
+    <TreeTest />
     
   </div>
 </template>
@@ -20,14 +21,16 @@
 <script>
 // import HelloWorld from './components/HelloWorld.vue'
 import FormExample from '@/components/form/index.vue';
-import NodeTest from '@/components/recursion/NodeTest.vue';
+// import NodeTest from '@/components/recursion/NodeTest.vue';
+import TreeTest from '@/components/recursion';
 
 export default {
   name: 'app',
   components: {
     // HelloWorld,
     FormExample,
-    NodeTest
+    // NodeTest,
+    TreeTest
   }
 }
 </script>
